@@ -1,8 +1,11 @@
-let buttonEl = document.querySelector("#save-task");
+let formEl = document.querySelector("#task-form");
 let tasksToDoEl = document.querySelector("#tasks-to-do");
 
 //Function to create list item on button click
 let createTaskHandler = function() {
+    //prevent auto refresh on submit
+    event.preventDefault();
+
     let listItemEl = document.createElement("li");
     listItemEl.className = "task-item";
     listItemEl.textContent = "This is a new task.";
@@ -10,4 +13,4 @@ let createTaskHandler = function() {
 };
 
 //on click add new task item
-buttonEl.addEventListener("click", createTaskHandler);
+formEl.addEventListener("submit", createTaskHandler);
