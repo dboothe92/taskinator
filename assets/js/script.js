@@ -1,7 +1,9 @@
 let taskIdCounter = 0;
 let formEl = document.querySelector("#task-form");
-let tasksToDoEl = document.querySelector("#tasks-to-do");
 let pageContentEl = document.querySelector("#page-content");
+let tasksToDoEl = document.querySelector("#tasks-to-do");
+let tasksInProgressEl = document.querySelector("#tasks-in-progress");
+let tasksCompletedEl = document.querySelector("#tasks-completed");
 
 //Function to create list item on button click
 let taskFormHandler = function(event) {
@@ -155,7 +157,31 @@ let deleteTask = function(taskId) {
     taskSelected.remove();
 };
 
+let taskStatusChangeHandler = function(event) {
+    //get task item id
+    let taskId = event.target.getAttribute("data-task-id");
+
+    //get curently selected options value and convert to lowercase
+    let statusValue = event.target.value.toLowerCase();
+
+    //find the parent task item element based on id
+    let taskSelected = document.querySelector(".task-item[data-task-id = '" + taskId + "']");
+
+    if (statusValue === "to do") {
+        tasksToDoEl.appendChild(taskSelected);
+    } else if (statusValue === "in progress") {
+        tasksInProgressEl.appendChild(taskSelected);
+    } else if (statusValue === "completed") {
+        tasksCompletedEl.appendChild(taskSelected);
+    }
+};
+
 //on click add new task item
 formEl.addEventListener("submit", taskFormHandler);
 
+//runs correct function for edit and delete button in tasks
 pageContentEl.addEventListener("click", taskButtonHandler);
+
+//update status of tasks
+pageContentEl.addEventListener("change", taskStatusChangeHandler);
+
