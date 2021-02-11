@@ -67,9 +67,7 @@ let createTaskEl = function(taskDataObj) {
 
     //Increase counter for next id
     taskIdCounter++;
-
-    console.log(taskDataObj);
-    console.log(taskDataObj.status);
+    saveTasks();
 };
 
 //creates button in tasks
@@ -166,6 +164,7 @@ let completeEditTask = function(taskName, taskType, taskId) {
     //reset fotm to normal
     formEl.removeAttribute("data-task-id");
     document.querySelector("#save-task").textContent = "Add Task";
+    saveTasks();
 };
 
 //delete task function 
@@ -186,6 +185,7 @@ let deleteTask = function(taskId) {
 
     //update tasks array
     tasks = updatedTaskArr;
+    saveTasks();
 };
 
 //function to change the status of a task
@@ -213,7 +213,12 @@ let taskStatusChangeHandler = function(event) {
             tasks[i].status = statusValue;
         }
     }
-    console.log(tasks);
+    saveTasks();
+};
+
+//Save to local storage
+let saveTasks = function() {
+   localStorage.setItem("tasks", JSON.stringify(tasks)); 
 };
 
 //on click add new task item
