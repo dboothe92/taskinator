@@ -4,6 +4,7 @@ let pageContentEl = document.querySelector("#page-content");
 let tasksToDoEl = document.querySelector("#tasks-to-do");
 let tasksInProgressEl = document.querySelector("#tasks-in-progress");
 let tasksCompletedEl = document.querySelector("#tasks-completed");
+let tasks = [];
 
 //Function to create list item on button click
 let taskFormHandler = function(event) {
@@ -32,7 +33,8 @@ let taskFormHandler = function(event) {
     } else {
         let taskDataObj = {
             name: taskNameInput,
-            type: taskTypeInput
+            type: taskTypeInput,
+            status: "to do"
         };
 
         createTaskEl(taskDataObj);
@@ -60,8 +62,14 @@ let createTaskEl = function(taskDataObj) {
     listItemEl.appendChild(taskActionsEl);
     tasksToDoEl.appendChild(listItemEl);
 
+    taskDataObj.id = taskIdCounter;
+    tasks.push(taskDataObj);
+
     //Increase counter for next id
     taskIdCounter++;
+
+    console.log(taskDataObj);
+    console.log(taskDataObj.status);
 };
 
 //creates button in tasks
@@ -144,6 +152,15 @@ let completeEditTask = function(taskName, taskType, taskId) {
     //set new values
     taskSelected.querySelector("h3.task-name").textContent = taskName;
     taskSelected.querySelector("span.task-type").textContent = taskType;
+
+    //loop through tasks array and task object with new content
+    for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === parseInt(taskId)) {
+            tasks[i].name = taskName;
+            tasks[i].type = taskType;
+        }
+    };
+
     alert("Task Updated");
 
     //reset fotm to normal
@@ -155,8 +172,23 @@ let completeEditTask = function(taskName, taskType, taskId) {
 let deleteTask = function(taskId) {
     let taskSelected = document.querySelector(".task-item[data-task-id = '" + taskId + "']");
     taskSelected.remove();
+
+    //create a new array to hold updated list of tasks
+    let updatedTaskArr = [];
+
+    //loop through current tasks
+    for (let i = 0; i < tasks.length; i++) {
+        //if id doesn't match keep it in array
+        if (tasks[i].id !== parseInt(taskId)) {
+            updatedTaskArr.push(tasks[i]);
+        }
+    }
+
+    //update tasks array
+    tasks = updatedTaskArr;
 };
 
+//function to change the status of a task
 let taskStatusChangeHandler = function(event) {
     //get task item id
     let taskId = event.target.getAttribute("data-task-id");
@@ -174,6 +206,14 @@ let taskStatusChangeHandler = function(event) {
     } else if (statusValue === "completed") {
         tasksCompletedEl.appendChild(taskSelected);
     }
+
+    //update task's in tasks array
+    for (var i = 0; i < tasks.length; i++) {
+        if (tasks[i].id === parseInt(taskId)) {
+            tasks[i].status = statusValue;
+        }
+    }
+    console.log(tasks);
 };
 
 //on click add new task item
