@@ -95,13 +95,38 @@ let createTaskActions = function(taskId) {
 
 //function to handle buttons clicks in side tasks
 let taskButtonHandler = function (event) {
-    console.log(event.target);
+    //get target element
+    let targetEl = event.target;
 
-    if (event.target.matches(".delete-btn")) {
+    //if edit button is clicked
+    if (targetEl.matches(".edit-btn")) {
+        let taskId = targetEl.getAttribute("data-task-id");
+        editTask(taskId);
+    } else if (event.target.matches(".delete-btn")) {
         let taskId = event.target.getAttribute("data-task-id");
         deleteTask(taskId);
     }
 };
+
+//edit task function
+let editTask = function(taskId) {
+    console.log("editing task # " + taskId);
+
+    //get task list from element
+    let taskSelected = document.querySelector(".task-item[data-task-id = '" + taskId +"']");
+
+    //get content from task name and type
+    let taskName = taskSelected.querySelector("h3.task-name").textContent;
+    console.log(taskName);
+
+    let taskType = taskSelected.querySelector("span.task-type").textContent;
+    console.log(taskType);
+
+    document.querySelector("input[name='task-name']").value = taskName;
+    document.querySelector("select[name = 'task-type']").value = taskType;
+    document.querySelector("#save-task").textContent = "Save Task";
+    formEl.setAttribute("data-task-id", taskId);
+}
 
 //delete task function 
 let deleteTask = function(taskId) {
