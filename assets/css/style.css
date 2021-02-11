@@ -21,12 +21,7 @@ body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-main {
-  min-height: 70vh;
-}
-
 header {
-  min-height: 20vh;
   background: var(--secondary);
   padding: 30px 25px;
   border-bottom: 5px solid var(--primary);
@@ -65,7 +60,6 @@ form .form-group {
 }
 
 footer {
-  min-height: 10vh;
   width: 100%;
   background: var(--secondary);
   color: var(--tertiary);
@@ -93,6 +87,7 @@ footer {
 .task-list-wrapper {
   flex: 1;
   margin: 0 20px 20px;
+  min-height: 70vh;
 }
 
 .list-title {
@@ -101,7 +96,6 @@ footer {
 }
 
 .task-list {
-  min-height: 60vh;
   list-style: none;
   padding: 15px;
   height: calc(100% - 50px);

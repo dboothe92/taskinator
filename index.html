@@ -23,7 +23,7 @@
         <div class="form-group">
             <select name="task-type" class="select-dropdown">
                 <option value="" disable selected>Pack a task type</option>
-                <option value="print">Print</option>
+                <option value="Print">Print</option>
                 <option value="Web">Web</option>
                 <option value="Mobile">Mobile</option>
             </select>
@@ -36,14 +36,29 @@
   </header>
 
   <!--Main Body Section-->
-  <main>
-
-    <!--Task List and items-->
+  <main class="page-content" id="page-content">
+    <!--Tasks To Do-->
     <section class="task-list-wrapper">
-       <h2 class="list-title">Tasks To Do</h2> 
-       <ul class="task-list" id="tasks-to-do">
-           <!--Tasks will dynamically be added here-->
-       </ul>
+      <h2 class="list-title">Tasks To Do</h2> 
+      <ul class="task-list" id="tasks-to-do">
+          <!--Tasks will dynamically be added here-->
+      </ul>
+    </section>
+
+    <!--Tasks In Progress-->
+    <section class="task-list-wrapper">
+      <h2 class="list-title">Tasks in Progress</h2>
+      <ul class="task-list" id="tasks-in-progress">
+        <!--Tasks will be dynamically edited-->
+      </ul>
+    </section>
+
+    <!--Completed Tasks-->
+    <section class="task-list-wrapper">
+      <h2 class="list-title">Completed Tasks</h2>
+      <ul class="task-list" id="tasks-completed">
+        <!--Tasks will be dynamically edited-->
+      </ul>
     </section>
   </main>
 
