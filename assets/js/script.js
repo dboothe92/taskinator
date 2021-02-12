@@ -225,51 +225,17 @@ let saveTasks = function() {
 //load data from local storage
 let loadTasks = function() {
     //retrieve tasks from local storage
-    tasks = localStorage.getItem('tasks');
+    savedTasks = localStorage.getItem('tasks');
     //Check if value of tasks is empty
-    if (!tasks) {
-        tasks = [];
+    if (!savedTasks) {
         return false;
     }
     //convert tasks back to an object array
-    tasks = JSON.parse(tasks);
+    savedTasks = JSON.parse(savedTasks);
 
-    for (let i = 0; i < tasks.length; i++){
-        //assign unique id to each object in array
-        tasks[i].id = taskIdCounter;
-
-        //create new Li's for the load
-        let listItemEl = document.createElement("li");
-        listItemEl.className = "task-item";
-        listItemEl.setAttribute("data-task-id", taskIdCounter);
-
-        //create new div for the load
-        let taskInfoEl = document.createElement("div");
-        taskInfoEl.className = "task-info";
-        taskInfoEl.innerHTML = "<h3 class = 'task-name'>" + tasks[i].name + "</h3><span class = 'task-type'>" + tasks[i].type + "</span>";
-
-        listItemEl.appendChild(taskInfoEl);
-
-        let taskActionsEl = createTaskActions(tasks[i].id);
-
-        listItemEl.appendChild(taskActionsEl);
-
-        //Check which colum each should go in
-        if (tasks[i].status === "to do") {
-            listItemEl.querySelector("select[name = 'status-change']").selectIndex = 0;
-            tasksToDoEl.appendChild(listItemEl);
-        } else if (tasks[i].status === "in progress") {
-            listItemEl.querySelector("select[name = 'status-change']").selectindex = 1;
-            tasksInProgressEl.appendChild(listItemEl);
-        }else if (tasks[i].status === "complete") {
-            listItemEl.querySelector("select[name = 'status-change']").selectIndex = 2;
-            tasksCompletedEl.appendChild(listItemEl);
-        }
-
-        taskIdCounter++;
-
-        console.log(listItemEl);
-        console.log(tasks[i]);
+    //loop through savedTasks
+    for(let i = 0; i < savedTasks.length; i++){
+        createTaskEl(savedTasks[i]);
     }
 };
 
