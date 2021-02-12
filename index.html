@@ -13,18 +13,52 @@
     <h1 class="page-title">Taskinator</h1>
     <p>Click the button below to add a new task!</p>
 
-    <button class="btn" id="save-task">Add Task</button>
+    <!--Add a Task form-->
+    <form id="task-form">
+        <div class="form-group">
+            <input type="text" name="task-name" placeholder="Enter Task Name"/>
+        </div>
+
+        <!--Dropdown menu-->
+        <div class="form-group">
+            <select name="task-type" class="select-dropdown">
+                <option value="" disable selected>Pack a task type</option>
+                <option value="Print">Print</option>
+                <option value="Web">Web</option>
+                <option value="Mobile">Mobile</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button class="btn" id="save-task">Add Task</button>
+        </div>
+    </form>
   </header>
 
   <!--Main Body Section-->
-  <main>
-
-    <!--Task List and items-->
+  <main class="page-content" id="page-content">
+    <!--Tasks To Do-->
     <section class="task-list-wrapper">
-       <h2 class="list-title">Tasks To Do</h2> 
-       <ul class="task-list" id="tasks-to-do">
-           <li class="task-item">A Task Will be Added Soon!</li>
-       </ul>
+      <h2 class="list-title">Tasks To Do</h2> 
+      <ul class="task-list" id="tasks-to-do">
+          <!--Tasks will dynamically be added here-->
+      </ul>
+    </section>
+
+    <!--Tasks In Progress-->
+    <section class="task-list-wrapper">
+      <h2 class="list-title">Tasks in Progress</h2>
+      <ul class="task-list" id="tasks-in-progress">
+        <!--Tasks will be dynamically edited-->
+      </ul>
+    </section>
+
+    <!--Completed Tasks-->
+    <section class="task-list-wrapper">
+      <h2 class="list-title">Completed Tasks</h2>
+      <ul class="task-list" id="tasks-completed">
+        <!--Tasks will be dynamically edited-->
+      </ul>
     </section>
   </main>
 
